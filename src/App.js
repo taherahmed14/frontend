@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Dashboard } from './components/dashboard';
+import { Routes, Route } from "react-router-dom";
+import { Teacher } from './components/teacher';
 
 function App() {
+  const [teachers, setTeachers] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path='/dashboard' 
+          element={<Dashboard teachers={teachers} setTeachers={setTeachers} pageNumber={pageNumber} setPageNumber={setPageNumber} />}>
+        </Route>
+        <Route path='/dashboard/:id' 
+          element={<Teacher />}>
+        </Route>
+      </Routes>
+      
     </div>
   );
 }
